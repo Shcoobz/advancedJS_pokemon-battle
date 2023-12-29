@@ -4,20 +4,24 @@ import '../css/PagePkmEncounter.css';
 import ComTitle from '../components/ComTitle';
 import ComBtn from '../components/ComBtn';
 
-// TODO: make sprite bigger
-// TODO: format pokemon name to TileCase, maybe with helper function already in place
-// TODO: each pokemon in one line
-
-const PagePkmEncounter = ({
-  locationUrl,
-  userPokemon,
-  onEncounter,
-  handleBackBtn,
-}) => {
+/**
+ * A component that manages the logic and UI for encountering wild Pokémon in a specific location.
+ *
+ * @param {Object} props - The props for the PagePkmEncounter component.
+ * @param {string} props.locationUrl - The URL of the location where the encounter takes place.
+ * @param {Object} props.userPokemon - The user's Pokémon available for the encounter.
+ * @param {Function} props.onEncounter - The function to handle a wild Pokémon encounter.
+ * @param {Function} props.handleBackBtn - The function to handle a button click to go back.
+ * @returns {JSX.Element} The PagePkmEncounter component.
+ */
+const PagePkmEncounter = ({ locationUrl, userPokemon, onEncounter, handleBackBtn }) => {
   const [pokemon, setPokemon] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    /**
+     * Fetches a random wild Pokémon encounter based on the location.
+     */
     const fetchPokemon = async () => {
       setIsLoading(true);
       const res = await fetch(`${locationUrl}`);
@@ -30,9 +34,7 @@ const PagePkmEncounter = ({
       }
 
       const randomAreaUrl =
-        locationData.areas[
-          Math.floor(Math.random() * locationData.areas.length)
-        ].url;
+        locationData.areas[Math.floor(Math.random() * locationData.areas.length)].url;
       const areaRes = await fetch(randomAreaUrl);
       const areaData = await areaRes.json();
 
@@ -60,6 +62,9 @@ const PagePkmEncounter = ({
     fetchPokemon();
   }, [locationUrl]);
 
+  /**
+   * Handles the click event when the user wants to start a battle with the encountered wild Pokémon.
+   */
   const handleEncounterClick = () => {
     onEncounter(pokemon);
   };

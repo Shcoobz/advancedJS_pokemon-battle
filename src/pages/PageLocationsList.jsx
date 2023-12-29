@@ -4,13 +4,20 @@ import ComTitle from '../components/ComTitle';
 import ComBtn from '../components/ComBtn';
 import '../css/PageLocationsList.css';
 
-// TODO: add different colors for different locations; depending on city/cave/mine etc? find a good criterium
-// TODO: add prev/next btn for location selection at top(?) => probably need a way to show on what page we are then
-
+/**
+ * A component that displays a list of locations for the user to choose from.
+ *
+ * @param {Object} props - The props for the PageLocationsList component.
+ * @param {Function} props.onLocationClick - The function to handle when a location is clicked.
+ * @returns {JSX.Element} The PageLocationsList component.
+ */
 const PageLocationsList = ({ onLocationClick }) => {
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
+    /**
+     * Fetches a list of locations from the PokeAPI and formats them for display.
+     */
     const fetchLocations = async () => {
       const res = await fetch('https://pokeapi.co/api/v2/location/?limit=21');
       const data = await res.json();

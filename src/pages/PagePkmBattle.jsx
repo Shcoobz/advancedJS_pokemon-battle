@@ -5,6 +5,18 @@ import ComBtn from '../components/ComBtn';
 import { formatPokemonName } from '../utils/UtiHelpers';
 import '../css/PagePkmBattle.css';
 
+/**
+ * A component that manages the logic and UI for Pokemon battles.
+ *
+ * @param {Object} props - The props for the PagePkmBattle component.
+ * @param {Object} props.userPokemon - The user's Pokemon participating in the battle.
+ * @param {Object} props.wildPokemon - The wild Pokemon encountered in the battle.
+ * @param {Function} props.onPokemonCaught - The function to handle when a Pokemon is caught during the battle.
+ * @param {Function} props.handleBackBtnClick - The function to handle a button click to go back.
+ * @param {Function} props.handleBattleLost - The function to handle when the battle is lost.
+ * @param {Function} props.handleBattleEnd - The function to handle the end of the battle.
+ * @returns {JSX.Element} The PagePkmBattle component.
+ */
 function PagePkmBattle({
   userPokemon,
   wildPokemon,
@@ -30,7 +42,7 @@ function PagePkmBattle({
     return pokemon.stats.find((s) => s.stat.name === 'hp').base_stat;
   }
 
-  // handle updates to HP
+  // Handle updates to HP
   useEffect(() => {
     if (userPokemonHP <= 0) {
       setIsBattleLost(true);
@@ -39,28 +51,26 @@ function PagePkmBattle({
     }
   }, [userPokemonHP, wildPokemonHP, onPokemonCaught, wildPokemon]);
 
-  // calc damage
+  // Calculate damage
   function calculateDamage(attack, defense) {
     const Z = Math.floor(Math.random() * (255 - 217 + 1)) + 217;
 
-    return Math.floor(
-      ((((2 / 5 + 2) * attack * 60) / defense / 50 + 2) * Z) / 255
-    );
+    return Math.floor(((((2 / 5 + 2) * attack * 60) / defense / 50 + 2) * Z) / 255);
   }
 
-  // get base stat value for given stat name
+  // Get base stat value for given stat name
   function getStatValue(pokemon, statName) {
     return pokemon.stats.find((stat) => stat.stat.name === statName).base_stat;
   }
 
-  // handle single attack from one pkm to another
+  // Handle single attack from one pkm to another
   function performAttack(attacker, defender, defenderHP, setDefenderHP) {
     const attackStat = getStatValue(attacker, 'attack');
     const defenseStat = getStatValue(defender, 'defense');
 
     const damage = calculateDamage(attackStat, defenseStat);
 
-    // subtract the damage from defender's HP, ensuring it doesn't drop below 0
+    // Subtract the damage from defender's HP, ensuring it doesn't drop below 0
     setDefenderHP(Math.max(defenderHP - damage, 0));
 
     if (attacker === userPokemon) {
@@ -73,28 +83,28 @@ function PagePkmBattle({
   function handleAttack() {
     setAttackingPokemon('user');
 
-    // perform user attack on wild pkm
+    // Perform user attack on wild pkm
     performAttack(userPokemon, wildPokemon, wildPokemonHP, setWildPokemonHP);
 
-    // after 1 second, indicate that user pkm has hit target
+    // After 1 second, indicate that user pkm has hit target
     setTimeout(function () {
       setHitPokemon('user');
     }, 1000);
 
-    // after another second, clear hit indicator && let wild pkm attack
+    // After another second, clear hit indicator && let wild pkm attack
     setTimeout(function () {
       setHitPokemon('');
       setAttackingPokemon('wild');
 
-      // wild pkm attack on user pkm
+      // Wild pkm attack on user pkm
       performAttack(wildPokemon, userPokemon, userPokemonHP, setUserPokemonHP);
 
-      // after 1 second, indicate that wild pkm has hit target
+      // After 1 second, indicate that wild pkm has hit target
       setTimeout(function () {
         setHitPokemon('wild');
       }, 1000);
 
-      // after another second, clear hit indicator && end wild pkm turn
+      // After another second, clear hit indicator && end wild pkm turn
       setTimeout(function () {
         setHitPokemon('');
         setAttackingPokemon('');
@@ -102,7 +112,7 @@ function PagePkmBattle({
       }, 2000);
     }, 2000);
 
-    // if the user pkm HP drops to 0, the battle is lost
+    // If the user pkm HP drops to 0, the battle is lost
     if (userPokemonHP <= 0) {
       setTimeout(function () {
         handleBattleLost();
@@ -111,17 +121,14 @@ function PagePkmBattle({
     }
   }
 
-  // define class names for pkm based on attack/hit status
+  // Define class names for pkm based on attack/hit status
   let wildPkmClass = defineClass('wild');
   let userPkmClass = defineClass('user');
 
   function defineClass(playerType) {
     let classes = `battle-${playerType}-pkm-sprite-img `;
 
-    if (
-      attackingPokemon === playerType &&
-      hitPokemon !== determineOpponent(playerType)
-    ) {
+    if (attackingPokemon === playerType && hitPokemon !== determineOpponent(playerType)) {
       classes += 'attacking';
     } else if (
       hitPokemon === determineOpponent(playerType) &&
@@ -140,7 +147,7 @@ function PagePkmBattle({
     setCurrentScreen('escape');
   }
 
-  // display battle lost page
+  // Display battle lost page
   if (isBattleLost) {
     return <PagePkmBattleFightLost handleBackBtnClick={handleBackBtnClick} />;
   }
@@ -149,9 +156,7 @@ function PagePkmBattle({
     <div className='battle-wild-pkm-area'>
       <div className='battle-wild-pkm-stats'>
         <h3>
-          <span className='wild-pkm-name'>
-            {formatPokemonName(wildPokemon.name)}
-          </span>
+          <span className='wild-pkm-name'>{formatPokemonName(wildPokemon.name)}</span>
           <span className='wild-pkm-hp'> HP: {wildPokemonHP}</span>
         </h3>
       </div>
@@ -176,9 +181,7 @@ function PagePkmBattle({
       </div>
       <div className='battle-user-pkm-stats'>
         <h3>
-          <span className='user-pkm-name'>
-            {formatPokemonName(userPokemon.name)}
-          </span>
+          <span className='user-pkm-name'>{formatPokemonName(userPokemon.name)}</span>
           <span className='user-pkm-hp'>HP: {userPokemonHP}</span>
         </h3>
       </div>
@@ -221,7 +224,7 @@ function PagePkmBattle({
     </div>
   );
 
-  // check to see if user is trying to escape
+  // Check to see if user is trying to escape
   if (currentScreen === 'battle') {
     currentPage = (
       <div className='battle-screen'>
@@ -236,9 +239,7 @@ function PagePkmBattle({
       </div>
     );
   } else {
-    currentPage = (
-      <PagePkmBattleEscape handleBackBtnClick={handleBackBtnClick} />
-    );
+    currentPage = <PagePkmBattleEscape handleBackBtnClick={handleBackBtnClick} />;
   }
 
   return <div>{currentPage}</div>;
