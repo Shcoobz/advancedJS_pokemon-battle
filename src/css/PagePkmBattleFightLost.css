@@ -1,0 +1,7 @@
+.battle-lost-img {
+  width: 1000px;
+  height: 550px;
+  background-image: url('../img/PagePkmBattleFightLost.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}

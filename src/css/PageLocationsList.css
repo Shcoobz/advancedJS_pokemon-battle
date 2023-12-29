@@ -1,0 +1,21 @@
+.location-title {
+  margin-bottom: 50px;
+}
+
+.locations-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+}
+
+.location-btn {
+  height: 5rem;
+  font-size: 25px;
+  margin: 10px;
+}
+
+.location-btn:hover {
+  background: rgba(63, 195, 128, 0.5);
+}

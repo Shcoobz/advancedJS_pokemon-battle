@@ -1,0 +1,157 @@
+.battle-screen {
+  border: 2px solid #000;
+  border-radius: 10px;
+  padding-left: 100px;
+  padding-right: 100px;
+  background: grey;
+}
+
+.battle-field {
+  justify-content: space-between;
+  background-image: url('../img/PagePkmBattle-bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 850px;
+  height: 500px;
+  padding: 0 20px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  margin-left: -80px;
+  margin-right: -80px;
+  margin-top: 25px;
+}
+
+.battle-wild-pkm-area,
+.battle-user-pkm-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.battle-wild-pkm-stats {
+  width: 250px;
+  height: 75px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  background: whitesmoke;
+  color: black;
+  margin-top: -250px;
+  margin-left: -5px;
+}
+
+.wild-pkm-hp {
+  margin-left: 75px;
+}
+
+.battle-wild-pkm-sprite-img {
+  width: 350px;
+  height: 350px;
+}
+
+.battle-user-pkm-sprite-img {
+  width: 350px;
+  height: 350px;
+  margin-top: -100px;
+  margin-left: -500px;
+  position: relative;
+  z-index: 1;
+}
+
+.battle-user-pkm-stats {
+  width: 250px;
+  height: 75px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  background: whitesmoke;
+  color: black;
+  margin-top: -205px;
+  margin-left: 600px;
+}
+
+.user-pkm-hp {
+  margin-left: 75px;
+}
+
+.battle-message-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid #000;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  margin-left: -80px;
+  margin-right: -80px;
+  position: relative;
+  z-index: 2;
+  background-color: whitesmoke;
+}
+
+.battle-turn-area {
+  color: #000;
+  border: 2px solid #000;
+  border-radius: 10px;
+  margin-left: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 2.5px;
+  width: calc(50% - 5px);
+  height: 150px;
+}
+
+.battle-turn-status {
+  font-size: 30px;
+  margin-top: 50px;
+}
+
+.battle-message-area {
+  border: 2px solid #000;
+  border-radius: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  margin-left: 2.5px;
+  width: calc(50% - 5px);
+  height: 150px;
+}
+
+.battle-message-content {
+  color: black;
+}
+
+@keyframes attackAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.attacking {
+  animation: attackAnimation 1s;
+}
+
+@keyframes hitAnimation {
+  0% {
+    transform: translate(0);
+  }
+  25% {
+    transform: translate(-10px, 0);
+  }
+  50% {
+    transform: translate(0);
+  }
+  75% {
+    transform: translate(10px, 0);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.hit {
+  animation: hitAnimation 0.5s;
+}

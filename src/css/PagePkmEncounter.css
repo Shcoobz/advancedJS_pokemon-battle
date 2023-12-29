@@ -1,0 +1,38 @@
+.battle-prep {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-image: url('../img/PagePkmEncounter.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 850px;
+  height: 500px;
+  padding: 0 20px;
+}
+
+.user-pokemon {
+  width: 300px;
+  height: 300px;
+  position: relative;
+  left: 25px;
+  top: 15px;
+  transform: scaleX(-1);
+}
+
+.wild-pokemon {
+  width: 300px;
+  height: 300px;
+  position: relative;
+  left: 0px;
+  top: 50px;
+}
+
+.user-pkm-stats,
+.wild-pkm-stats {
+  margin-top: 60px;
+  margin-left: 15px;
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  font-size: 30px;
+}
