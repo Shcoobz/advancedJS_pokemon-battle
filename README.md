@@ -1,4 +1,4 @@
-# Pokémon Battle App
+# Pokémon Battle App: [LIVE DEMO](https://shcoobz.github.io/react_pokemon-battle/)
 
 ![Pokemon Battle Logo Image](/src/img/pokemon-battle.png)
 
