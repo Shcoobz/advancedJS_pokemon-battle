@@ -61,20 +61,6 @@ If you lose a battle, you can easily return to the location selection screen and
 - Pokémon API: Used to fetch Pokémon data and sprites.
 - Other libraries and tools as needed.
 
-## Usage
-
-To run the project locally, use the following command:
-
-```bash
-npm install
-```
-
-then
-
-```bash
-npm run dev
-```
-
 ---
 
 _Note: This document provides an overview of [Pokemon Battle]. For detailed instructions and more information, please refer to the source code documentation._
